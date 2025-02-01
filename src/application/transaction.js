@@ -34,3 +34,21 @@ export const createTransaction = async (req, res) => {
     }
     
 };
+
+export const getAllTransactions = async (req, res) => {
+    const transactions = await Transaction.find();
+    res.status(200).json(transactions);
+    return;
+};
+
+export const getTransationById = async (req, res) => {
+    const transactionId = req.parms.id;
+    const transaction = await Transaction.findById(transactionId);
+    if (!transaction) {
+        res.status(404).send();
+        return;
+    }
+    res.status(200).json(transaction);
+    return;
+};
+
